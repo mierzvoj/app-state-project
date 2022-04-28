@@ -13,8 +13,8 @@ const Item = function (props: ItemProps) {
     setHex(value.toString(16));
   };
 
-  const handleDelete = (itemId: number, hadnlerFn: (val: number) => void) => {
-    hadnlerFn(itemId);
+  const handleDelete = (itemId: number, handlerFn: (val: number) => void) => {
+      handlerFn(itemId);
   };
 
   return (
