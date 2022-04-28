@@ -1,32 +1,39 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 
 interface ItemProps {
-  id: number;
-  value: number;
-  handler: (val: number) => void;
+    key: number;
+    id: number;
+    value: number;
+    isHex: boolean;
+    handler: (val: number) => void;
 }
 
-const Item = function (props: ItemProps) {
-  const [hex, setHex] = useState(props.value + "");
+const Item = function ({id, value, isHex, handler}: ItemProps){
+    const [hex, setHex] = useState(isHex);
 
-  const handleToHexValue = (value: number) => {
-    setHex(value.toString(16));
-  };
+    const toggle = () => {
+        setHex(!hex);
+    };
 
-  const handleDelete = (itemId: number, handlerFn: (val: number) => void) => {
-      handlerFn(itemId);
-  };
+    const handleDelete = (itemId: number, handlerFn: (val: number) => void) => {
+        handlerFn(itemId);
+    };
+    console.log(isHex);
+    console.log(hex);
 
-  return (
-    <div>
-      <button onClick={() => handleToHexValue(props.value)}>
-        Go for Hex {hex}
-      </button>
-      <button onClick={() => handleDelete(props.id, props.handler)}>
-        Delete
-      </button>
-    </div>
-  );
+    console.log(value.toString(16));
+
+
+    return (
+        <div>
+
+            My val is <b>{hex ? value.toString(16) : value }</b>
+            <button onClick={toggle}>Toggle hex</button>
+            <button onClick={() => handleDelete(id, handler)}>
+                Delete
+            </button>
+        </div>
+    );
 };
 
 export default Item;
