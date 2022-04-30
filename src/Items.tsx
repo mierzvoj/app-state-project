@@ -1,15 +1,29 @@
 import React, {useState} from "react";
 import Item from "./Item";
+import Number from "./Number";
+
 
 const Items = () => {
 
-    const [numbers, setNumbers] = useState(Array.from({length: 10}, ( id: number ) => {
+    const [numbers, setNumbers] = useState(Array.from({length: 10}, (id: number) => {
         return {
             id,
             num: Math.floor(Math.random() * 10),
             isHex: false,
+
         }
     }));
+
+
+    const[state, setState] = useState(numbers);
+
+    const updateData = () => {
+        let temp_state = [...state];
+        let temp_element = {...state[1]}
+        temp_element.num = Math.random() * 10;
+        temp_state[1] = temp_element;
+        setState( temp_state );
+    }
 
 
     const handleDelete = function (itemId: number) {
@@ -23,19 +37,27 @@ const Items = () => {
     };
 
     const deleteHandler = (itemId: number) => handleDelete(itemId);
-
+    const refresh = () => updateData();
 
     return (
-        <>
+        <><>
+
+            <button onClick={refresh}>Refresh</button>
             {numbers.map((item) => (
                 <Item
                     key={item.id}
                     id={item.id}
                     handler={deleteHandler}
                     value={item.num}
-                    isHex={item.isHex}
-                />
+                    isHex={item.isHex}/>
+
             ))}
+        </>
+            <>
+                {numbers.map((item) => (
+                    <Number number={item.num} isHex={item.isHex}/>
+                ))}
+            </>
         </>
     );
 };
