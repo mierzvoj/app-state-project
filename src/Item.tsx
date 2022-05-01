@@ -1,31 +1,22 @@
-import React, {useState} from "react";
+import React from "react";
 
 interface ItemProps {
-    key: number;
-    id: number;
-    value: number;
-    isHex: boolean;
-    handler: (val: number) => void;
+  id: number;
+  value: number;
+  isHex: boolean;
+  handler: (val: number) => void;
 }
 
-const Item = function ({id, value, isHex, handler}: ItemProps) {
+const Item = function ({ id, value, isHex, handler }: ItemProps) {
+  const handleDelete = (itemId: number, handlerFn: (val: number) => void) => {
+    handlerFn(itemId);
+  };
 
-
-    const handleDelete = (itemId: number, handlerFn: (val: number) => void) => {
-        handlerFn(itemId);
-    };
-
-
-    return (
-
-<>
-
-            <button onClick={() => handleDelete(id, handler)}>
-                Delete
-            </button>
-
-</>
-    );
+  return (
+    <>
+      <button onClick={() => handleDelete(id, handler)}>Delete</button>
+    </>
+  );
 };
 
 export default Item;
