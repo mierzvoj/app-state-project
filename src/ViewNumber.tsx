@@ -1,11 +1,11 @@
 import React from "react";
 
-export interface NumberProps {
+export interface ViewNumberProps {
   number: number;
   isHex: boolean;
 }
 
-const Number = ({ number, isHex }: NumberProps) => {
+const ViewNumber = ({ number, isHex }: ViewNumberProps) => {
   const [hex, setHex] = React.useState(isHex);
 
   // console.log(hex);
@@ -23,4 +23,4 @@ const Number = ({ number, isHex }: NumberProps) => {
     </div>
   );
 };
-export default Number;
+export default ViewNumber;

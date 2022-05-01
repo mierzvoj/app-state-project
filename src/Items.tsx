@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Item from "./Item";
-import Number from "./Number";
+import ViewNumber from "./ViewNumber";
 
 const Items = () => {
   const [numbers, setNumbers] = useState(
@@ -51,7 +51,7 @@ const Items = () => {
       </>
       <>
         {numbers.map((item) => (
-          <Number key={item.id} number={item.num} isHex={item.isHex} />
+          <ViewNumber key={item.id} number={item.num} isHex={item.isHex} />
         ))}
       </>
     </>
