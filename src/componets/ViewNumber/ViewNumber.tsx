@@ -1,4 +1,5 @@
 import React from "react";
+import "./ViewNumber.css";
 
 export interface ViewNumberProps {
   number: number;
@@ -18,8 +19,10 @@ const ViewNumber = ({ number, isHex }: ViewNumberProps) => {
 
   return (
     <div>
-      My number is <b>{hex ? number.toString(16) : number}</b>;
-      <button onClick={toggle}>toggle from number</button>
+      My number is <b>{hex ? number.toString(16) : number}</b>
+      <button className="button" onClick={toggle}>
+        toggle from number
+      </button>
     </div>
   );
 };
