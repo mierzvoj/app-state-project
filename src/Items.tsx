@@ -8,7 +8,7 @@ const Items = () => {
     const [numbers, setNumbers] = useState(Array.from({length: 10}, (id: number) => {
         return {
             id,
-            num: Math.floor(Math.random() * 10),
+            num: Math.floor(Math.random() * 100),
             isHex: false,
 
         }
