@@ -2,14 +2,7 @@ import React, { useState } from "react";
 import Item from "../Item/Item";
 import ViewNumber from "../ViewNumber/ViewNumber";
 
-export interface PokemonData {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: { name: string; url: string }[];
-}
-
-const Items = (pokemonData: PokemonData) => {
+const Items = () => {
   const [numbers, setNumbers] = useState(
     Array.from({ length: 10 }, (val, key) => {
       return {
@@ -59,11 +52,6 @@ const Items = (pokemonData: PokemonData) => {
       <>
         {numbers.map((item) => (
           <ViewNumber key={item.id} number={item.num} isHex={item.isHex} />
-        ))}
-      </>
-      <>
-        {pokemonData.results.map((p, index) => (
-          <div key={index}>{p.name}</div>
         ))}
       </>
     </>
