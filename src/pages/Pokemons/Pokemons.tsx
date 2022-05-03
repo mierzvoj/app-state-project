@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Pokemon, { PokemonItem } from "../Pokemon/Pokemon";
@@ -61,8 +62,12 @@ function Pokemons() {
           })}
       <br />
       <div className="buttons">
-        <button onClick={onPrevious}>Previous</button>
-        <button onClick={onNext}>Next</button>
+        <Button color="primary" onClick={onPrevious}>
+          Previous
+        </Button>
+        <Button color="primary" onClick={onNext}>
+          Next
+        </Button>
       </div>
       <br />
       <Outlet />
