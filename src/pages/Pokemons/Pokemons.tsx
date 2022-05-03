@@ -10,13 +10,13 @@ export interface PokemonData {
   results: PokemonItem[];
 }
 
-export interface AppState {
+export interface PokemonsState {
   loading: boolean;
   data: PokemonData;
 }
 
 function Pokemons() {
-  const [appState, setAppState] = useState<AppState>({
+  const [appState, setAppState] = useState<PokemonsState>({
     loading: false,
     data: {
       count: 0,
@@ -26,18 +26,31 @@ function Pokemons() {
     },
   });
 
+  const [url, setUrl] = useState<string | null>(
+    "https://pokeapi.co/api/v2/pokemon"
+  );
+
   useEffect(() => {
-    setAppState({ loading: true, data: { ...appState.data } });
-    fetch("https://pokeapi.co/api/v2/pokemon")
-      .then(
-        (response) => response.json(),
-        (error) => console.error(error)
-      )
-      .then((data) => {
-        console.log(data);
-        setAppState({ loading: false, data });
+    if (url) {
+      setAppState({
+        loading: true,
+        data: { ...appState.data },
       });
-  }, []);
+
+      fetch(url)
+        .then(
+          (response) => response.json(),
+          (error) => console.error(error)
+        )
+        .then((data) => {
+          console.log(data);
+          setAppState({ loading: false, data });
+        });
+    }
+  }, [url]);
+
+  const onNext = () => setUrl(appState.data.next);
+  const onPrevious = () => setUrl(appState.data.previous);
 
   return (
     <div className="pokemons">
@@ -46,6 +59,11 @@ function Pokemons() {
         : appState.data.results.map((itm, index) => {
             return <Pokemon key={index} {...itm} />;
           })}
+      <br />
+      <div className="buttons">
+        <button onClick={onPrevious}>Previous</button>
+        <button onClick={onNext}>Next</button>
+      </div>
       <br />
       <Outlet />
     </div>
