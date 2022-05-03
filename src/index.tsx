@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App";
 import "./index.css";
 import Pokemons from "./pages/Pokemons/Pokemons";
+import PokemonsToolbar from "./pages/PokemonsToolbar/PokemonsToolbar";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
@@ -14,7 +15,9 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}></Route>
-        <Route path="pokemons" element={<Pokemons />}></Route>
+        <Route path="pokemons" element={<Pokemons />}>
+          <Route path="" element={<PokemonsToolbar />}></Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

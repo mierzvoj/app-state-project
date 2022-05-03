@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Pokemon, { PokemonItem } from "../Pokemon/Pokemon";
 import "./Pokemons.css";
 
@@ -46,8 +46,8 @@ function Pokemons() {
         : appState.data.results.map((itm, index) => {
             return <Pokemon key={index} {...itm} />;
           })}
-      <br></br>
-      <Link to="/">Home</Link>
+      <br />
+      <Outlet />
     </div>
   );
 }
