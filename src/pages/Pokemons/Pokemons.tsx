@@ -1,7 +1,7 @@
 import { Button, CircularProgress } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import Pokemon, { PokemonItem } from "../Pokemon/Pokemon";
+import PokemonTable, { PokemonItem } from "../PokemonTable/PokemonTable";
 import "./Pokemons.css";
 
 export interface PokemonData {
@@ -59,9 +59,7 @@ function Pokemons() {
         <CircularProgress />
       ) : (
         <>
-          {appState.data.results.map((itm, index) => {
-            return <Pokemon key={index} {...itm} />;
-          })}
+          <PokemonTable pokemons={appState.data.results} />
           <br />
           <div className="buttons">
             <Button color="primary" onClick={onPrevious}>
