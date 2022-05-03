@@ -1,4 +1,4 @@
-import { Button } from "@material-ui/core";
+import { Button, CircularProgress } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Pokemon, { PokemonItem } from "../Pokemon/Pokemon";
@@ -55,22 +55,26 @@ function Pokemons() {
 
   return (
     <div className="pokemons">
-      {appState.loading
-        ? "Loading..."
-        : appState.data.results.map((itm, index) => {
+      {appState.loading ? (
+        <CircularProgress />
+      ) : (
+        <>
+          {appState.data.results.map((itm, index) => {
             return <Pokemon key={index} {...itm} />;
           })}
-      <br />
-      <div className="buttons">
-        <Button color="primary" onClick={onPrevious}>
-          Previous
-        </Button>
-        <Button color="primary" onClick={onNext}>
-          Next
-        </Button>
-      </div>
-      <br />
-      <Outlet />
+          <br />
+          <div className="buttons">
+            <Button color="primary" onClick={onPrevious}>
+              Previous
+            </Button>
+            <Button color="primary" onClick={onNext}>
+              Next
+            </Button>
+          </div>
+          <br />
+          <Outlet />
+        </>
+      )}
     </div>
   );
 }
