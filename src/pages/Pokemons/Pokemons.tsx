@@ -28,7 +28,7 @@ function Pokemons() {
   });
 
   const [url, setUrl] = useState<string | null>(
-    "https://pokeapi.co/api/v2/pokemon"
+    "https://pokeapi.co/api/v2/pokemon?limit=10"
   );
 
   useEffect(() => {
