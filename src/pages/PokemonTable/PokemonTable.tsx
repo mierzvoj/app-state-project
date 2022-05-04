@@ -15,6 +15,13 @@ export interface PokemonItem {
 }
 
 const PokemonTable = ({ pokemons }: { pokemons: PokemonItem[] }) => {
+  const handleClick = (
+    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
+    row: PokemonItem
+  ) => {
+    console.log(row);
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -26,7 +33,10 @@ const PokemonTable = ({ pokemons }: { pokemons: PokemonItem[] }) => {
         </TableHead>
         <TableBody>
           {pokemons.map((row) => (
-            <TableRow key={row.name}>
+            <TableRow
+              key={row.name}
+              onClick={(event) => handleClick(event, row)}
+            >
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
