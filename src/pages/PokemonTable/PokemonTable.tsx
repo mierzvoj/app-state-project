@@ -7,6 +7,7 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
+import { useNavigate } from "react-router-dom";
 import "./PokemonTable.css";
 
 export interface PokemonItem {
@@ -15,6 +16,17 @@ export interface PokemonItem {
 }
 
 const PokemonTable = ({ pokemons }: { pokemons: PokemonItem[] }) => {
+  const navigate = useNavigate();
+
+  const handleClick = (
+    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
+    row: PokemonItem
+  ) => {
+    navigate("/pokemons/" + row.name, {
+      state: { url: row.url, name: row.name },
+    });
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -26,7 +38,10 @@ const PokemonTable = ({ pokemons }: { pokemons: PokemonItem[] }) => {
         </TableHead>
         <TableBody>
           {pokemons.map((row) => (
-            <TableRow key={row.name}>
+            <TableRow
+              key={row.name}
+              onClick={(event) => handleClick(event, row)}
+            >
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
