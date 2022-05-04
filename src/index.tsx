@@ -16,7 +16,7 @@ root.render(
       <Routes>
         <Route path="/" element={<App />}></Route>
         <Route path="pokemons" element={<Pokemons />}>
-          <Route path="" element={<PokemonsToolbar />}></Route>
+          <Route path=":name" element={<PokemonsToolbar />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
