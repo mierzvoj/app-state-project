@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import Item from "./Item";
-import Number from "./Number";
+import Item from "./componets/Item/Item";
+import Number from "./componets/ViewNumber/ViewNumber";
 
 
 const Items = () => {
@@ -20,7 +20,7 @@ const Items = () => {
     const updateData = () => {
         let temp_state = [...state];
         let temp_element = {...state[1]}
-        temp_element.num = Math.random() * 10;
+        temp_element.num = Math.random() * 100;
         temp_state[1] = temp_element;
         setState( temp_state );
     }
