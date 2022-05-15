@@ -1,4 +1,5 @@
 import {
+  Button,
   Paper,
   Table,
   TableBody,
@@ -8,12 +9,9 @@ import {
   TableRow,
 } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
+import { PokemonItem } from "../../model/pokemon-item.model";
+import { IPokemonContext, PokemonContext } from "../Pokemons/Pokemons";
 import "./PokemonTable.css";
-
-export interface PokemonItem {
-  name: string;
-  url: string;
-}
 
 const PokemonTable = ({ pokemons }: { pokemons: PokemonItem[] }) => {
   const navigate = useNavigate();
@@ -27,6 +25,18 @@ const PokemonTable = ({ pokemons }: { pokemons: PokemonItem[] }) => {
     });
   };
 
+  const addToWishlist = (row: PokemonItem, context: IPokemonContext) => {
+    if (context.wishListHelper) {
+      context.wishListHelper.addItem(row);
+    }
+  };
+
+  const addToCaught = (row: PokemonItem, context: IPokemonContext) => {
+    if (context.caughtHelper) {
+      context.caughtHelper.addItem(row);
+    }
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -34,6 +44,8 @@ const PokemonTable = ({ pokemons }: { pokemons: PokemonItem[] }) => {
           <TableRow>
             <TableCell className="header">Pokemon name</TableCell>
             <TableCell className="header">Details url</TableCell>
+            <TableCell className="header"></TableCell>
+            <TableCell className="header"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -46,6 +58,29 @@ const PokemonTable = ({ pokemons }: { pokemons: PokemonItem[] }) => {
                 {row.name}
               </TableCell>
               <TableCell>{row.url}</TableCell>
+              <TableCell>
+                <PokemonContext.Consumer>
+                  {(context) => (
+                    <Button
+                      color="primary"
+                      onClick={() => addToWishlist(row, context)}
+                    >
+                      WishList
+                    </Button>
+                  )}
+                </PokemonContext.Consumer>
+                <PokemonContext.Consumer>
+                  {(context) => (
+                    <Button
+                      color="primary"
+                      onClick={() => addToCaught(row, context)}
+                    >
+                      Caught
+                    </Button>
+                  )}
+                </PokemonContext.Consumer>
+              </TableCell>
+              <TableCell></TableCell>
             </TableRow>
           ))}
         </TableBody>
