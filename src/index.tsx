@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import App from "./App";
 import "./index.css";
+import Login from "./pages/Login/Login";
+import NotFound from "./pages/NotFound/NotFound";
 import Pokemons from "./pages/Pokemons/Pokemons";
 import PokemonsToolbar from "./pages/PokemonsToolbar/PokemonsToolbar";
 import reportWebVitals from "./reportWebVitals";
@@ -14,10 +15,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />}></Route>
+        <Route path="/" element={<Login />}></Route>
         <Route path="pokemons" element={<Pokemons />}>
           <Route path=":name" element={<PokemonsToolbar />}></Route>
         </Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
