@@ -15,17 +15,9 @@ import {
 } from "@material-ui/core";
 import CloseIcon from "@mui/icons-material/Close";
 import React, { ChangeEvent, FormEvent, useState } from "react";
+import { UserData } from "../../model/user-data.model";
+import UsersList from "../UsersList/UsersList";
 import "./UserForm.css";
-
-export interface UserData {
-  name?: string;
-  surname?: string;
-  city?: string;
-  gender?: "female" | "male";
-  active?: boolean;
-  email?: string;
-  password?: string;
-}
 
 const cities: string[] = ["Gdańsk", "Gdynia", "Sopot", "Warszawa", "Zakopane"];
 
@@ -33,12 +25,12 @@ export default function UserForm() {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [city, setCity] = useState("");
-  const [gender, setGender] = useState("female");
+  const [gender, setGender] = useState<"female" | "male" | undefined>("female");
   const [active, setActive] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
-  const users: UserData[] = [];
+  const [users, setUsers] = useState<UserData[]>([]);
 
   const validateForm = () => {
     return email.length > 0 && password.length > 0;
@@ -46,7 +38,10 @@ export default function UserForm() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(event);
+    setUsers([
+      ...users,
+      { name, surname, city, gender, active, email, password },
+    ]);
     setOpen(true);
   };
 
@@ -87,7 +82,7 @@ export default function UserForm() {
     <>
       <div className="Login">
         <form onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}>
-          <FormGroup>
+          <FormGroup id="formgroup">
             <FormLabel>Name</FormLabel>
             <FormControl id="name">
               <TextField
@@ -125,7 +120,9 @@ export default function UserForm() {
               <RadioGroup
                 defaultValue={gender}
                 value={gender}
-                onChange={(e) => setGender(e.target.value as string)}
+                onChange={(e) =>
+                  setGender(e.target.value as "female" | "male" | undefined)
+                }
               >
                 <FormControlLabel
                   value="female"
@@ -184,6 +181,7 @@ export default function UserForm() {
           action={action}
         />
       </div>
+      <UsersList users={users} />
     </>
   );
 }
