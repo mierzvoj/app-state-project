@@ -1,3 +1,5 @@
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,19 +10,37 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import "./ValuesList.css";
 
-const ValuesList = ({ values }: { values: number[] }) => {
+const ValuesList = ({
+  values,
+  onRemove,
+}: {
+  values: number[];
+  onRemove: (index: number) => void;
+}) => {
   return (
     <TableContainer component={Paper}>
       <Table>
         <TableHead>
           <TableRow>
             <TableCell className="header">Value</TableCell>
+            <TableCell className="header"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {values.map((row, index) => (
             <TableRow key={index}>
               <TableCell>{row}</TableCell>
+              <TableCell>
+                {/* <Button onClick={(e) => onRemove(index)}>Remove</Button> */}
+                <IconButton
+                  size="small"
+                  aria-label="close"
+                  color="inherit"
+                  onClick={(e) => onRemove(index)}
+                >
+                  <CloseIcon fontSize="small" />
+                </IconButton>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

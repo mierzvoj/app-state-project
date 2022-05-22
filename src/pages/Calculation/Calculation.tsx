@@ -25,6 +25,12 @@ export default function Calculation() {
     setOpen(true);
   };
 
+  const handleRemove = (index: number) => {
+    const result = [...values];
+    result.splice(index, 1);
+    setValues(result);
+  };
+
   const handleClose = (
     event: React.SyntheticEvent | Event,
     reason?: string
@@ -65,19 +71,19 @@ export default function Calculation() {
               />
             </FormControl>
           </FormGroup>
-          <Button type="submit" color="primary" disabled={!validateForm()}>
-            Apply
+          <Button type="submit" color="success" disabled={!validateForm()}>
+            Insert
           </Button>
         </form>
         <Snackbar
           open={open}
           autoHideDuration={6000}
-          message="Value added!"
+          message="Value inserted!"
           onClose={handleClose}
           action={action}
         />
       </div>
-      <ValuesList values={values} />
+      <ValuesList values={values} onRemove={handleRemove} />
     </>
   );
 }
