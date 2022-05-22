@@ -1,19 +1,17 @@
-import {
-  Button,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  FormLabel,
-  IconButton,
-  MenuItem,
-  Radio,
-  RadioGroup,
-  Select,
-  Snackbar,
-  TextField,
-} from "@material-ui/core";
 import CloseIcon from "@mui/icons-material/Close";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import FormLabel from "@mui/material/FormLabel";
+import IconButton from "@mui/material/IconButton";
+import MenuItem from "@mui/material/MenuItem";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import Select from "@mui/material/Select";
+import Snackbar from "@mui/material/Snackbar";
+import TextField from "@mui/material/TextField";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { UserData } from "../../model/user-data.model";
 import UsersList from "../UsersList/UsersList";
@@ -166,7 +164,7 @@ export default function UserForm() {
               />
             </FormControl>
           </FormGroup>
-          <Button type="submit" color="default" disabled={!validateForm()}>
+          <Button type="submit" color="primary" disabled={!validateForm()}>
             Apply
           </Button>
           <Button color="secondary" onClick={handleReset}>

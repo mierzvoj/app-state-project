@@ -1,13 +1,11 @@
-import {
-  Button,
-  FormControl,
-  FormGroup,
-  FormLabel,
-  IconButton,
-  Snackbar,
-  TextField,
-} from "@material-ui/core";
+import TextField from "@material-ui/core/TextField";
 import CloseIcon from "@mui/icons-material/Close";
+import Button from "@mui/material/Button";
+import FormControl from "@mui/material/FormControl";
+import FormGroup from "@mui/material/FormGroup";
+import FormLabel from "@mui/material/FormLabel";
+import IconButton from "@mui/material/IconButton";
+import Snackbar from "@mui/material/Snackbar";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import ValuesList from "../ValuesList/ValuesList";
 import "./Calculation.css";
@@ -67,7 +65,7 @@ export default function Calculation() {
               />
             </FormControl>
           </FormGroup>
-          <Button type="submit" color="default" disabled={!validateForm()}>
+          <Button type="submit" color="primary" disabled={!validateForm()}>
             Apply
           </Button>
         </form>

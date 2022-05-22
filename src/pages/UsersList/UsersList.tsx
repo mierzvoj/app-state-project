@@ -1,12 +1,10 @@
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@material-ui/core";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 import { UserData } from "../../model/user-data.model";
 import "./UsersList.css";
 
@@ -26,8 +24,8 @@ const UsersList = ({ users }: { users: UserData[] }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {users.map((row) => (
-            <TableRow key={row.name}>
+          {users.map((row, index) => (
+            <TableRow key={index}>
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
