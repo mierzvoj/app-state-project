@@ -52,6 +52,16 @@ const ValuesList = ({
               </div>
             </TableCell>
           </TableRow>
+          <TableRow>
+            <TableCell colSpan={2}>
+              <div className="footer">
+                Average:{" "}
+                {values.length
+                  ? values.reduce((p, c) => p + c, 0) / values.length
+                  : "-"}
+              </div>
+            </TableCell>
+          </TableRow>
         </TableFooter>
       </Table>
     </TableContainer>
