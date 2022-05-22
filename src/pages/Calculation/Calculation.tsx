@@ -76,6 +76,7 @@ export default function Calculation() {
           </Button>
         </form>
         <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
           open={open}
           autoHideDuration={6000}
           message="Value inserted!"

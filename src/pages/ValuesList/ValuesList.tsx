@@ -46,8 +46,10 @@ const ValuesList = ({
         </TableBody>
         <TableFooter>
           <TableRow>
-            <TableCell className="footer">
-              Sum: {values.reduce((p, c) => p + c, 0)}
+            <TableCell colSpan={2}>
+              <div className="footer">
+                Sum: {values.reduce((p, c) => p + c, 0)}
+              </div>
             </TableCell>
           </TableRow>
         </TableFooter>
