@@ -11,7 +11,7 @@ import ValuesList from "../ValuesList/ValuesList";
 import "./Calculation.css";
 
 export default function Calculation() {
-  const [value, setValue] = useState<number>(0);
+  const [value, setValue] = useState<number>(Math.round(Math.random() * 100));
   const [open, setOpen] = useState(false);
   const [values, setValues] = useState<number[]>([]);
 
@@ -22,6 +22,7 @@ export default function Calculation() {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setValues([...values, value]);
+    setValue(Math.round(Math.random() * 100));
     setOpen(true);
   };
 

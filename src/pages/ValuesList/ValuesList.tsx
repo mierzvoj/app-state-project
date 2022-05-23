@@ -31,15 +31,17 @@ const ValuesList = ({
             <TableRow key={index}>
               <TableCell>{row}</TableCell>
               <TableCell>
-                {/* <Button onClick={(e) => onRemove(index)}>Remove</Button> */}
-                <IconButton
-                  size="small"
-                  aria-label="close"
-                  color="inherit"
-                  onClick={(e) => onRemove(index)}
-                >
-                  <CloseIcon fontSize="small" />
-                </IconButton>
+                <div className="align-right">
+                  {/* <Button onClick={(e) => onRemove(index)}>Remove</Button> */}
+                  <IconButton
+                    size="small"
+                    aria-label="close"
+                    color="inherit"
+                    onClick={(e) => onRemove(index)}
+                  >
+                    <CloseIcon fontSize="small" />
+                  </IconButton>
+                </div>
               </TableCell>
             </TableRow>
           ))}
