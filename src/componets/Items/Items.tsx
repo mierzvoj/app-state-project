@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Item from "../Item/Item";
 import ViewNumber from "../ViewNumber/ViewNumber";
+import items from "../../Items";
 
 const Items = () => {
   const [numbers, setNumbers] = useState(
@@ -23,6 +24,15 @@ const Items = () => {
     setState(temp_state);
   };
 
+  // const generateNumbers = () => {
+  //   setNumbers(Array.from({length: 10}, () => {
+  //     return {
+  //       num: Math.floor(Math.random() * 10),
+  //       isHex: false
+  //     }
+  //   }));
+  // }
+
   const handleDelete = function (itemId: number) {
     const newItems = [...numbers];
     var index = newItems.findIndex((i) => i.id === itemId);
@@ -33,7 +43,7 @@ const Items = () => {
   };
 
   const deleteHandler = (itemId: number) => handleDelete(itemId);
-  const refresh = () => updateData();
+  const refresh = () => items();
 
   return (
     <>
