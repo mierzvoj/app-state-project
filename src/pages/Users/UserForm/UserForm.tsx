@@ -14,7 +14,7 @@ import Snackbar from "@mui/material/Snackbar";
 import TextField from "@mui/material/TextField";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { UserData } from "../../../model/user-data.model";
-import UsersList from "../UsersList/UsersList";
+import { UsersContext } from "../Users";
 import "./UserForm.css";
 
 const cities: string[] = ["Gdańsk", "Gdynia", "Sopot", "Warszawa", "Zakopane"];
@@ -77,109 +77,110 @@ export default function UserForm() {
   );
 
   return (
-    <>
-      <div className="Login">
-        <form onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}>
-          <FormGroup id="formgroup">
-            <FormLabel>Name</FormLabel>
-            <FormControl id="name">
-              <TextField
-                autoFocus
-                value={name}
-                onChange={(
-                  e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-                ) => setName(e.target.value)}
-              />
-            </FormControl>
-            <FormLabel>Surname</FormLabel>
-            <FormControl id="surname">
-              <TextField
-                value={surname}
-                onChange={(
-                  e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-                ) => setSurname(e.target.value)}
-              />
-            </FormControl>
-            <FormLabel>City</FormLabel>
-            <FormControl id="city">
-              <Select
-                value={city}
-                onChange={(e) => setCity(e.target.value as string)}
-              >
-                {cities.map((c) => (
-                  <MenuItem key={c} value={c}>
-                    {c}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <FormControl id="gender">
-              <FormLabel>Gender</FormLabel>
-              <RadioGroup
-                defaultValue={gender}
-                value={gender}
-                onChange={(e) =>
-                  setGender(e.target.value as "female" | "male" | undefined)
+    <UsersContext.Consumer>
+      {(context) => (
+        <div className="Login">
+          <form onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}>
+            <FormGroup id="formgroup">
+              <FormLabel>Name</FormLabel>
+              <FormControl id="name">
+                <TextField
+                  autoFocus
+                  value={name}
+                  onChange={(
+                    e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+                  ) => setName(e.target.value)}
+                />
+              </FormControl>
+              <FormLabel>Surname</FormLabel>
+              <FormControl id="surname">
+                <TextField
+                  value={surname}
+                  onChange={(
+                    e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+                  ) => setSurname(e.target.value)}
+                />
+              </FormControl>
+              <FormLabel>City</FormLabel>
+              <FormControl id="city">
+                <Select
+                  value={city}
+                  onChange={(e) => setCity(e.target.value as string)}
+                >
+                  {cities.map((c) => (
+                    <MenuItem key={c} value={c}>
+                      {c}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl id="gender">
+                <FormLabel>Gender</FormLabel>
+                <RadioGroup
+                  defaultValue={gender}
+                  value={gender}
+                  onChange={(e) =>
+                    setGender(e.target.value as "female" | "male" | undefined)
+                  }
+                >
+                  <FormControlLabel
+                    value="female"
+                    control={<Radio />}
+                    label="Female"
+                  />
+                  <FormControlLabel
+                    value="male"
+                    control={<Radio />}
+                    label="Male"
+                  />
+                </RadioGroup>
+              </FormControl>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={active}
+                    onChange={(e) => setActive(e.target.checked as boolean)}
+                  />
                 }
-              >
-                <FormControlLabel
-                  value="female"
-                  control={<Radio />}
-                  label="Female"
-                />
-                <FormControlLabel
-                  value="male"
-                  control={<Radio />}
-                  label="Male"
-                />
-              </RadioGroup>
-            </FormControl>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={active}
-                  onChange={(e) => setActive(e.target.checked as boolean)}
-                />
-              }
-              label="Active"
-            />
-            <FormLabel>Email</FormLabel>
-            <FormControl id="email">
-              <TextField
-                type="email"
-                value={email}
-                onChange={(
-                  e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-                ) => setEmail(e.target.value)}
+                label="Active"
               />
-            </FormControl>
-            <FormLabel>Password</FormLabel>
-            <FormControl id="password">
-              <TextField
-                type="password"
-                value={password}
-                onChange={(
-                  e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-                ) => setPassword(e.target.value)}
-              />
-            </FormControl>
-          </FormGroup>
-          <Button type="submit" color="primary" disabled={!validateForm()}>
-            Apply
-          </Button>
-          <Button color="secondary" onClick={handleReset}>
-            Reset
-          </Button>
-        </form>
-        <Snackbar
-          open={open}
-          autoHideDuration={6000}
-          message="Item added!"
-          onClose={handleClose}
-          action={action}
-        />
-      </div>
-      <UsersList users={users} />
-    </>
+              <FormLabel>Email</FormLabel>
+              <FormControl id="email">
+                <TextField
+                  type="email"
+                  value={email}
+                  onChange={(
+                    e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+                  ) => setEmail(e.target.value)}
+                />
+              </FormControl>
+              <FormLabel>Password</FormLabel>
+              <FormControl id="password">
+                <TextField
+                  type="password"
+                  value={password}
+                  onChange={(
+                    e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+                  ) => setPassword(e.target.value)}
+                />
+              </FormControl>
+            </FormGroup>
+            <Button type="submit" color="primary" disabled={!validateForm()}>
+              Apply
+            </Button>
+            <Button color="secondary" onClick={handleReset}>
+              Reset
+            </Button>
+          </form>
+          <Snackbar
+            open={open}
+            autoHideDuration={6000}
+            message="Item added!"
+            onClose={handleClose}
+            action={action}
+          />
+        </div>
+      )}
+    </UsersContext.Consumer>
   );
 }
