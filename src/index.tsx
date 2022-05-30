@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
-import Calculation from "./pages/Calculation/Calculation";
+import Calculation from "./pages/Calculations/Calculation/Calculation";
 import Login from "./pages/Login/Login";
 import NotFound from "./pages/NotFound/NotFound";
 import Pokemons from "./pages/Pokemons/Pokemons";
-import PokemonsToolbar from "./pages/PokemonsToolbar/PokemonsToolbar";
-import UserForm from "./pages/UserForm/UserForm";
+import PokemonsToolbar from "./pages/Pokemons/PokemonsToolbar/PokemonsToolbar";
+import UserForm from "./pages/Users/UserForm/UserForm";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

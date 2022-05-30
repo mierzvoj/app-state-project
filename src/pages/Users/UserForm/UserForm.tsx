@@ -13,7 +13,7 @@ import Select from "@mui/material/Select";
 import Snackbar from "@mui/material/Snackbar";
 import TextField from "@mui/material/TextField";
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { UserData } from "../../model/user-data.model";
+import { UserData } from "../../../model/user-data.model";
 import UsersList from "../UsersList/UsersList";
 import "./UserForm.css";
 
