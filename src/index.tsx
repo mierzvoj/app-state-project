@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import Calculation from "./pages/Calculations/Calculation/Calculation";
+import LocationsForm from "./pages/Locations/LocationsForm/LocationsForm";
 import Login from "./pages/Login/Login";
 import NotFound from "./pages/NotFound/NotFound";
 import Pokemons from "./pages/Pokemons/Pokemons";
@@ -21,6 +22,7 @@ root.render(
         <Route path="/users" element={<Users />}></Route>
         <Route path="/users/user/:name" element={<UserForm />}></Route>
         <Route path="/calculation" element={<Calculation />}></Route>
+        <Route path="/locationsform" element={<LocationsForm />}></Route>
         <Route path="pokemons" element={<Pokemons />}>
           <Route path=":name" element={<PokemonsToolbar />}></Route>
         </Route>
