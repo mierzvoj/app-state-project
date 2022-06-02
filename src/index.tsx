@@ -10,6 +10,7 @@ import Pokemons from "./pages/Pokemons/Pokemons";
 import PokemonsToolbar from "./pages/Pokemons/PokemonsToolbar/PokemonsToolbar";
 import UserForm from "./pages/Users/UserForm/UserForm";
 import Users from "./pages/Users/Users";
+import UsersList from "./pages/Users/UsersList/UsersList";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -20,7 +21,8 @@ root.render(
       <Routes>
         <Route path="/" element={<Login />}></Route>
         <Route path="/users" element={<Users />}>
-          <Route path="/users/user/:name" element={<UserForm />}></Route>
+          <Route path="/users/list" element={<UsersList />}></Route>
+          <Route path="/users/user/:index" element={<UserForm />}></Route>
         </Route>
         <Route path="/calculation" element={<Calculation />}></Route>
         <Route path="/locationsform" element={<LocationsForm />}></Route>

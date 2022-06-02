@@ -12,38 +12,56 @@ import RadioGroup from "@mui/material/RadioGroup";
 import Select from "@mui/material/Select";
 import Snackbar from "@mui/material/Snackbar";
 import TextField from "@mui/material/TextField";
-import React, { ChangeEvent, FormEvent, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { ChangeEvent, useContext, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { IUsersContext, UsersContext } from "../Users";
 import "./UserForm.css";
 
 const cities: string[] = ["Gdańsk", "Gdynia", "Sopot", "Warszawa", "Zakopane"];
 
 export default function UserForm() {
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [city, setCity] = useState("");
-  const [gender, setGender] = useState<"female" | "male" | undefined>("female");
-  const [active, setActive] = useState(true);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [open, setOpen] = useState(false);
-
   const { users, setUsers } = useContext<IUsersContext>(UsersContext);
+  const params = useParams();
+  const index = ((params.index ?? -1) as number) ?? -1;
   const navigate = useNavigate();
+
+  const user = users[index] ?? {};
+
+  const [name, setName] = useState(user?.name ?? "");
+  const [surname, setSurname] = useState(user?.surname ?? "");
+  const [city, setCity] = useState(user?.city ?? "");
+  const [gender, setGender] = useState<"female" | "male" | undefined>(
+    user?.gender ?? "female"
+  );
+  const [active, setActive] = useState(user?.active ?? true);
+  const [email, setEmail] = useState(user?.email ?? "");
+  const [password, setPassword] = useState(user?.password ?? "");
+
+  const [open, setOpen] = useState(false);
 
   const validateForm = () => {
     return email.length > 0 && password.length > 0;
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleApply = () => {
+    setOpen(true);
+    const copy = [...users];
+    copy[index] = { name, surname, city, gender, active, email, password };
+    setUsers(copy);
+    navigate("/users/list");
+  };
+
+  const handleAdd = () => {
     setOpen(true);
     setUsers([
       ...users,
       { name, surname, city, gender, active, email, password },
     ]);
-    navigate("/users");
+    navigate("/users/list");
+  };
+
+  const handleCancel = () => {
+    navigate("/users/list");
   };
 
   const handleClose = (
@@ -81,7 +99,7 @@ export default function UserForm() {
 
   return (
     <div className="Login">
-      <form onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}>
+      <form>
         <FormGroup id="formgroup">
           <FormLabel>Name</FormLabel>
           <FormControl id="name">
@@ -162,11 +180,21 @@ export default function UserForm() {
             />
           </FormControl>
         </FormGroup>
-        <Button type="submit" color="primary" disabled={!validateForm()}>
+        <Button
+          color="primary"
+          disabled={!validateForm()}
+          onClick={handleApply}
+        >
           Apply
+        </Button>
+        <Button color="primary" disabled={!validateForm()} onClick={handleAdd}>
+          Add new
         </Button>
         <Button color="secondary" onClick={handleReset}>
           Reset
+        </Button>
+        <Button color="warning" onClick={handleCancel}>
+          Cancel
         </Button>
       </form>
       <Snackbar

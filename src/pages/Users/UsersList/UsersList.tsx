@@ -6,7 +6,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useNavigate } from "react-router-dom";
-import { UserData } from "../../../model/user-data.model";
 import { UsersContext } from "../Users";
 import "./UsersList.css";
 
@@ -15,11 +14,9 @@ const UsersList = () => {
 
   const handleClick = (
     event: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
-    row: UserData
+    index: number
   ) => {
-    navigate("/users/user/" + (row?.name ? row.name : ""), {
-      state: { url: row.name, name: row.name },
-    });
+    navigate("/users/user/" + index);
   };
 
   return (
@@ -42,7 +39,7 @@ const UsersList = () => {
               {context.users.map((row, index) => (
                 <TableRow
                   key={index}
-                  onClick={(event) => handleClick(event, row)}
+                  onClick={(event) => handleClick(event, index)}
                 >
                   <TableCell component="th" scope="row">
                     {row.name}
