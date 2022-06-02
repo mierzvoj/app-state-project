@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
+import { Outlet } from "react-router-dom";
 import { UserData } from "../../model/user-data.model";
 import UsersList from "./UsersList/UsersList";
 
@@ -49,6 +50,7 @@ const Users = () => {
   return (
     <UsersContext.Provider value={value}>
       <UsersList />
+      <Outlet />
     </UsersContext.Provider>
   );
 };

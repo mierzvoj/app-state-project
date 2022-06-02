@@ -19,8 +19,9 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />}></Route>
-        <Route path="/users" element={<Users />}></Route>
-        <Route path="/users/user/:name" element={<UserForm />}></Route>
+        <Route path="/users" element={<Users />}>
+          <Route path="/users/user/:name" element={<UserForm />}></Route>
+        </Route>
         <Route path="/calculation" element={<Calculation />}></Route>
         <Route path="/locationsform" element={<LocationsForm />}></Route>
         <Route path="pokemons" element={<Pokemons />}>

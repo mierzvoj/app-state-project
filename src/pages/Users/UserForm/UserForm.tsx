@@ -38,11 +38,11 @@ export default function UserForm() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setOpen(true);
     setUsers([
       ...users,
       { name, surname, city, gender, active, email, password },
     ]);
-    setOpen(true);
     navigate("/users");
   };
 
