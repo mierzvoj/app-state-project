@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { UserData } from "../../model/user-data.model";
 import UsersList from "./UsersList/UsersList";
 
@@ -34,17 +34,20 @@ const entryData: UserData[] = [
 
 export interface IUsersContext {
   users: UserData[];
+  setUsers: Dispatch<SetStateAction<UserData[]>>;
 }
 
-export const UsersContext = React.createContext<IUsersContext>({ users: [] });
+export const UsersContext = React.createContext<IUsersContext>({
+  users: entryData,
+  setUsers: () => {},
+});
 
 const Users = () => {
+  const [users, setUsers] = useState<UserData[]>(entryData);
+  const value = { users, setUsers };
+
   return (
-    <UsersContext.Provider
-      value={{
-        users: entryData,
-      }}
-    >
+    <UsersContext.Provider value={value}>
       <UsersList />
     </UsersContext.Provider>
   );
