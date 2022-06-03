@@ -11,8 +11,8 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import React, { ChangeEvent, FormEvent, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { LocationData } from "../../../model/location-data.model";
-import LocationList from "../../LocationList/LocationList";
 import "./LocationsForm.css";
 
 const cities: string[] = ["Gdańsk", "Gdynia", "Sopot"];
@@ -22,7 +22,10 @@ export default function LocationsForm() {
   const [city, setCity] = useState("");
   const [open, setOpen] = useState(false);
   const [locations, setLocations] = useState<LocationData[]>([]);
-
+  const params = useParams();
+  const index = ((params.index ?? -1) as number) ?? -1;
+  const location = locations[index] ?? {};
+  const navigate = useNavigate();
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLocations([...locations, { street, streetNo, city }]);
@@ -30,6 +33,13 @@ export default function LocationsForm() {
   };
   const validateForm = () => {
     return street.length > 0 && city.length > 0;
+  };
+  const handleApply = () => {
+    setOpen(true);
+    const copy = [...locations];
+    copy[index] = { street, streetNo, city };
+    setLocations(copy);
+    navigate("/locations/list");
   };
   const handleClose = (
     event: React.SyntheticEvent | Event,
@@ -40,10 +50,18 @@ export default function LocationsForm() {
     }
     setOpen(false);
   };
+  const handleAdd = () => {
+    setOpen(true);
+    setLocations([...locations, { street, streetNo, city }]);
+    navigate("/locations/list");
+  };
   const handleReset = () => {
     setStreet("");
     setStreetNo(0);
     setCity("");
+  };
+  const handleCancel = () => {
+    navigate("/locations/list");
   };
   const action = (
     <React.Fragment>
@@ -58,59 +76,64 @@ export default function LocationsForm() {
     </React.Fragment>
   );
   return (
-    <>
-      <div className="Location">
-        <form onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}>
-          <FormGroup id="formgroup">
-            <FormLabel>Street</FormLabel>
-            <FormControl id="street">
-              <TextField
-                autoFocus
-                value={street}
-                onChange={(
-                  e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-                ) => setStreet(e.target.value)}
-              />
-            </FormControl>
-            <FormLabel>streetNo</FormLabel>
-            <FormControl id="streetNo">
-              <TextField
-                value={streetNo}
-                onChange={(
-                  e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-                ) => setStreetNo(parseInt(e.target.value))}
-              />
-            </FormControl>
-            <FormLabel>City</FormLabel>
-            <FormControl id="city">
-              <Select
-                value={city}
-                onChange={(e) => setCity(e.target.value as string)}
-              >
-                {cities.map((c) => (
-                  <MenuItem key={c} value={c}>
-                    {c}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </FormGroup>
-          <Button type="submit" color="primary" disabled={!validateForm()}>
-            Apply
-          </Button>
-          <Button color="secondary" onClick={handleReset}>
-            Reset
-          </Button>
-        </form>
-        <Snackbar
-          open={open}
-          autoHideDuration={6000}
-          message="Item added!"
-          onClose={handleClose}
-          action={action}
-        />
-      </div>
-      <LocationList locations={locations} />
-    </>
+    <div className="Location">
+      <form onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}>
+        <FormGroup id="formgroup">
+          <FormLabel>Street</FormLabel>
+          <FormControl id="street">
+            <TextField
+              autoFocus
+              value={street}
+              onChange={(
+                e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+              ) => setStreet(e.target.value)}
+            />
+          </FormControl>
+          <FormLabel>streetNo</FormLabel>
+          <FormControl id="streetNo">
+            <TextField
+              value={streetNo}
+              onChange={(
+                e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+              ) => setStreetNo(parseInt(e.target.value))}
+            />
+          </FormControl>
+          <FormLabel>City</FormLabel>
+          <FormControl id="city">
+            <Select
+              value={city}
+              onChange={(e) => setCity(e.target.value as string)}
+            >
+              {cities.map((c) => (
+                <MenuItem key={c} value={c}>
+                  {c}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </FormGroup>
+        <Button
+          color="primary"
+          disabled={!validateForm()}
+          onClick={handleApply}
+        >
+          Apply
+        </Button>
+        <Button color="primary" disabled={!validateForm()} onClick={handleAdd}>
+          Add new
+        </Button>
+        <Button color="secondary" onClick={handleReset}>
+          Reset
+        </Button>
+        <Button onClick={handleCancel}>Cancel</Button>
+      </form>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        message="Item added!"
+        onClose={handleClose}
+        action={action}
+      />
+    </div>
   );
 }

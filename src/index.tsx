@@ -26,6 +26,10 @@ root.render(
         <Route path="/users/list" element={<UsersList />}></Route>
         <Route path="/locations" element={<Locations />}></Route>
         <Route path="/locations/list" element={<LocationsList />}></Route>
+        <Route
+          path="/locations/location/:index"
+          element={<LocationsForm />}
+        ></Route>
 
         <Route path="/users/user/:index" element={<UserForm />}></Route>
 
