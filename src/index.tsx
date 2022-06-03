@@ -3,7 +3,9 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import Calculation from "./pages/Calculations/Calculation/Calculation";
+import Locations from "./pages/Locations/Locations";
 import LocationsForm from "./pages/Locations/LocationsForm/LocationsForm";
+import LocationsList from "./pages/Locations/LocationsList/LocationsList";
 import Login from "./pages/Login/Login";
 import NotFound from "./pages/NotFound/NotFound";
 import Pokemons from "./pages/Pokemons/Pokemons";
@@ -20,10 +22,13 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />}></Route>
-        <Route path="/users" element={<Users />}>
-          <Route path="/users/list" element={<UsersList />}></Route>
-          <Route path="/users/user/:index" element={<UserForm />}></Route>
-        </Route>
+        <Route path="/users" element={<Users />}></Route>
+        <Route path="/users/list" element={<UsersList />}></Route>
+        <Route path="/locations" element={<Locations />}></Route>
+        <Route path="/locations/list" element={<LocationsList />}></Route>
+
+        <Route path="/users/user/:index" element={<UserForm />}></Route>
+
         <Route path="/calculation" element={<Calculation />}></Route>
         <Route path="/locationsform" element={<LocationsForm />}></Route>
         <Route path="pokemons" element={<Pokemons />}>
