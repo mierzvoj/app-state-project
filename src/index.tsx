@@ -3,11 +3,11 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import Calculation from "./pages/Calculations/Calculation/Calculation";
+import Login from "./pages/Common/Login/Login";
+import NotFound from "./pages/Common/NotFound/NotFound";
 import Locations from "./pages/Locations/Locations";
 import LocationsForm from "./pages/Locations/LocationsForm/LocationsForm";
 import LocationsList from "./pages/Locations/LocationsList/LocationsList";
-import Login from "./pages/Login/Login";
-import NotFound from "./pages/NotFound/NotFound";
 import Pokemons from "./pages/Pokemons/Pokemons";
 import PokemonsToolbar from "./pages/Pokemons/PokemonsToolbar/PokemonsToolbar";
 import UserForm from "./pages/Users/UserForm/UserForm";
@@ -24,15 +24,13 @@ root.render(
         <Route path="/" element={<Login />}></Route>
         <Route path="/users" element={<Users />}></Route>
         <Route path="/users/list" element={<UsersList />}></Route>
+        <Route path="/users/user/:index" element={<UserForm />}></Route>
         <Route path="/locations" element={<Locations />}></Route>
         <Route path="/locations/list" element={<LocationsList />}></Route>
         <Route
           path="/locations/location/:index"
           element={<LocationsForm />}
         ></Route>
-
-        <Route path="/users/user/:index" element={<UserForm />}></Route>
-
         <Route path="/calculation" element={<Calculation />}></Route>
         <Route path="/locationsform" element={<LocationsForm />}></Route>
         <Route path="pokemons" element={<Pokemons />}>
