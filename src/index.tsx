@@ -26,14 +26,14 @@ root.render(
           <Route path="/users/list" element={<UsersList />}></Route>
           <Route path="/users/user/:index" element={<UserForm />}></Route>
         </Route>
-        <Route path="/locations" element={<Locations />}></Route>
-        <Route path="/locations/list" element={<LocationsList />}></Route>
-        <Route
-          path="/locations/location/:index"
-          element={<LocationsForm />}
-        ></Route>
+        <Route path="/locations" element={<Locations />}>
+          <Route path="/locations/list" element={<LocationsList />}></Route>
+          <Route
+            path="/locations/location/:index"
+            element={<LocationsForm />}
+          ></Route>
+        </Route>
         <Route path="/calculation" element={<Calculation />}></Route>
-        <Route path="/locationsform" element={<LocationsForm />}></Route>
         <Route path="pokemons" element={<Pokemons />}>
           <Route path=":name" element={<PokemonsToolbar />}></Route>
         </Route>
