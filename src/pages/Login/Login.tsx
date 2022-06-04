@@ -13,11 +13,10 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 export interface LoginData {
-  // git conflict test
   email?: string;
   password?: string;
 }
-// git conflict test
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
