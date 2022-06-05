@@ -78,10 +78,7 @@ export default function UserDialog({
           </ul>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose} autoFocus>
-            Cancel
-          </Button>
-          <Button onClick={onClose}>Apply</Button>
+          <Button onClick={onClose}>Close</Button>
         </DialogActions>
       </Dialog>
     </div>

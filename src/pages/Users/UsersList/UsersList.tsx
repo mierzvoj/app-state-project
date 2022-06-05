@@ -23,7 +23,9 @@ const UsersList = () => {
   const handleClickOpen = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    setOpen(true);
+    if (open === false) {
+      setOpen(true);
+    }
   };
 
   const handleClose = () => {
@@ -35,20 +37,25 @@ const UsersList = () => {
     index: number,
     users: UserData[]
   ) => {
-    setRowIndex(index);
-    setHobbies(users[index].hobbies ?? []);
+    if (open === false) {
+      setRowIndex(index);
+      setHobbies(users[index].hobbies ?? []);
+    }
   };
 
   const handleRowDoubleClick = (
     event: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
     index: number
   ) => {
-    navigate("/users/user/" + index);
+    if (open === false) {
+      navigate("/users/user/" + index);
+    }
   };
 
   const handleHobbies = (hobbies: string[]) => {
     const result = [...users];
     result[rowIndex].hobbies = hobbies;
+    setHobbies(hobbies);
     setUsers(result);
   };
 
