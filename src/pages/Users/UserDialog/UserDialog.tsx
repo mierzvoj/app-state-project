@@ -14,21 +14,24 @@ import "./UserDialog.css";
 export default function UserDialog({
   open,
   onClose,
+  hobbies,
+  handleHobbies,
 }: {
   open: boolean;
   onClose: () => void;
+  hobbies: string[];
+  handleHobbies: (hobbies: string[]) => void;
 }) {
-  const [hobbies, setHobbies] = React.useState(["test1", "test2"]);
   const [hobby, setHobby] = React.useState("");
 
   const addHobby = () => {
-    setHobbies([...hobbies, hobby]);
+    handleHobbies([...hobbies, hobby]);
   };
 
   const removeHobby = (index: number) => {
     const result = [...hobbies];
     result.splice(index, 1);
-    setHobbies(result);
+    handleHobbies(result);
   };
 
   return (

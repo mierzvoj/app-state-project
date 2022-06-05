@@ -6,20 +6,23 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserData } from "../../../model/user-data.model";
 import UserDialog from "../UserDialog/UserDialog";
-import { UsersContext } from "../Users";
+import { IUsersContext, UsersContext } from "../Users";
 import "./UsersList.css";
 
 const UsersList = () => {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
+  const [hobbies, setHobbies] = React.useState<string[]>([]);
+  const [rowIndex, setRowIndex] = React.useState<number>(-1);
+  const { users, setUsers } = useContext<IUsersContext>(UsersContext);
 
   const handleClickOpen = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    event.stopPropagation();
     setOpen(true);
   };
 
@@ -27,11 +30,26 @@ const UsersList = () => {
     setOpen(false);
   };
 
+  const handleRowClick = (
+    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
+    index: number,
+    users: UserData[]
+  ) => {
+    setRowIndex(index);
+    setHobbies(users[index].hobbies ?? []);
+  };
+
   const handleRowDoubleClick = (
     event: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
     index: number
   ) => {
     navigate("/users/user/" + index);
+  };
+
+  const handleHobbies = (hobbies: string[]) => {
+    const result = [...users];
+    result[rowIndex].hobbies = hobbies;
+    setUsers(result);
   };
 
   return (
@@ -48,6 +66,7 @@ const UsersList = () => {
                 <TableCell className="header">Active</TableCell>
                 <TableCell className="header">Login</TableCell>
                 <TableCell className="header">Password</TableCell>
+                <TableCell className="header">Hobbies</TableCell>
                 <TableCell className="header">Dialog</TableCell>
               </TableRow>
             </TableHead>
@@ -55,6 +74,9 @@ const UsersList = () => {
               {context.users.map((row, index) => (
                 <TableRow
                   key={index}
+                  onClick={(event) =>
+                    handleRowClick(event, index, context.users)
+                  }
                   onDoubleClick={(event) => handleRowDoubleClick(event, index)}
                 >
                   <TableCell component="th" scope="row">
@@ -66,6 +88,7 @@ const UsersList = () => {
                   <TableCell>{row.active ? "Active" : "Inactive"}</TableCell>
                   <TableCell>{row.email}</TableCell>
                   <TableCell>{row.password}</TableCell>
+                  <TableCell>{row.hobbies?.map((h) => h + ",")}</TableCell>
                   <TableCell>
                     <Button
                       onClick={(event) => handleClickOpen(event)}
@@ -73,7 +96,12 @@ const UsersList = () => {
                     >
                       ...
                     </Button>
-                    <UserDialog open={open} onClose={handleClose}></UserDialog>
+                    <UserDialog
+                      open={open}
+                      onClose={handleClose}
+                      hobbies={hobbies}
+                      handleHobbies={handleHobbies}
+                    ></UserDialog>
                   </TableCell>
                 </TableRow>
               ))}

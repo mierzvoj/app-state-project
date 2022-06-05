@@ -11,6 +11,7 @@ const entryData: UserData[] = [
     active: true,
     email: "name1@test",
     password: "test",
+    hobbies: ["Swimming", "Photography"],
   },
   {
     name: "name2",
@@ -20,6 +21,7 @@ const entryData: UserData[] = [
     active: true,
     email: "name2@test",
     password: "test",
+    hobbies: ["Running", "Tourism"],
   },
   {
     name: "name3",
@@ -29,6 +31,7 @@ const entryData: UserData[] = [
     active: true,
     email: "name3@test",
     password: "test",
+    hobbies: ["Chess", "Video games", "Music"],
   },
 ];
 
