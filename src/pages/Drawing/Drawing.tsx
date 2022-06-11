@@ -54,10 +54,21 @@ function Drawing() {
     item: { x: number; y: number; r: number } = { x: 250, y: 250, r: 25 }
   ) => {
     if (ctx) {
+      ctx.beginPath();
       ctx.strokeStyle = "blue";
       ctx.lineWidth = 1;
       ctx.arc(item.x, item.y, item.r, 0, 2 * Math.PI);
       ctx.stroke();
+    }
+  };
+
+  const drawPoint = (item: { x: number; y: number } = { x: 0, y: 0 }) => {
+    if (ctx) {
+      ctx.beginPath();
+      ctx.fillStyle = "blue";
+      ctx.lineWidth = 1;
+      ctx.arc(item.x, item.y, 5, 0, 2 * Math.PI);
+      ctx.fill();
     }
   };
 
@@ -76,7 +87,10 @@ function Drawing() {
   };
 
   return (
-    <div className="drawing">
+    <div
+      className="drawing"
+      onClick={(e) => drawPoint({ x: e.clientX, y: e.clientY })}
+    >
       <canvas ref={canvas}></canvas>
     </div>
   );
