@@ -5,6 +5,7 @@ import "./index.css";
 import Calculation from "./pages/Calculations/Calculation/Calculation";
 import Login from "./pages/Common/Login/Login";
 import NotFound from "./pages/Common/NotFound/NotFound";
+import Drawing from "./pages/Drawing/Drawing";
 import Locations from "./pages/Locations/Locations";
 import LocationsForm from "./pages/Locations/LocationsForm/LocationsForm";
 import LocationsList from "./pages/Locations/LocationsList/LocationsList";
@@ -37,6 +38,7 @@ root.render(
         <Route path="pokemons" element={<Pokemons />}>
           <Route path=":name" element={<PokemonsToolbar />}></Route>
         </Route>
+        <Route path="drawing" element={<Drawing />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </BrowserRouter>
