@@ -69,6 +69,8 @@ function Drawing() {
       ctx.lineWidth = 1;
       ctx.arc(item.x, item.y, 5, 0, 2 * Math.PI);
       ctx.fill();
+      ctx.strokeStyle = "black";
+      ctx.strokeText(`x: ${item.x}, y: ${item.y}`, item.x + 10, item.y + 10);
     }
   };
 
