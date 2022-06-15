@@ -4,6 +4,14 @@ import "./Drawing.css";
 function Drawing() {
   const canvas = useRef<HTMLCanvasElement>(null);
   let ctx: CanvasRenderingContext2D | null = null;
+  const image = new Image();
+  image.src =
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Belarus_location_map.svg/1148px-Belarus_location_map.svg.png";
+  image.onload = () => {
+    if (ctx && canvas.current) {
+      ctx.drawImage(image, 0, 0, canvas.current?.width, canvas.current?.height);
+    }
+  };
 
   useEffect(() => {
     const canvasEle = canvas.current;
@@ -89,11 +97,11 @@ function Drawing() {
   };
 
   return (
-    <div
-      className="drawing"
-      onClick={(e) => drawPoint({ x: e.clientX, y: e.clientY })}
-    >
-      <canvas ref={canvas}></canvas>
+    <div className="drawing">
+      <canvas
+        ref={canvas}
+        onClick={(e) => drawPoint({ x: e.clientX, y: e.clientY })}
+      ></canvas>
     </div>
   );
 }
