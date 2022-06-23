@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import Calculation from "./pages/Calculations/Calculation/Calculation";
+import MenuAppBar from "./pages/Common/Layout/AppBar";
 import Login from "./pages/Common/Login/Login";
 import NotFound from "./pages/Common/NotFound/NotFound";
 import Drawing from "./pages/Drawing/Drawing";
@@ -21,8 +22,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+      <MenuAppBar />
       <Routes>
         <Route path="/" element={<Login />}></Route>
+
         <Route path="/users" element={<Users />}>
           <Route path="/users/list" element={<UsersList />}></Route>
           <Route path="/users/user/:index" element={<UserForm />}></Route>
