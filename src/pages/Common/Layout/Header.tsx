@@ -8,14 +8,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 
-export default function MenuAppBar() {
+const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleMenuClick = (pageURL: any) => {
     setAnchorEl(null);
   };
 
@@ -51,10 +51,14 @@ export default function MenuAppBar() {
                   horizontal: "right",
                 }}
                 open={Boolean(anchorEl)}
-                onClose={handleClose}
+                onClose={() => setAnchorEl(null)}
               >
-                <MenuItem onClick={handleClose}>Home</MenuItem>
-                <MenuItem onClick={handleClose}>Contact</MenuItem>
+                <MenuItem onClick={() => handleMenuClick("/locations/list")}>
+                  Home
+                </MenuItem>
+                <MenuItem onClick={() => handleMenuClick("/")}>
+                  Contact
+                </MenuItem>
               </Menu>
             </div>
           }
@@ -62,4 +66,5 @@ export default function MenuAppBar() {
       </AppBar>
     </Box>
   );
-}
+};
+export default Header;
