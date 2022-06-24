@@ -53,8 +53,12 @@ const Header = () => {
                 open={Boolean(anchorEl)}
                 onClose={() => setAnchorEl(null)}
               >
-                <MenuItem onClick={() => handleMenuClick("")}>Home</MenuItem>
-                <MenuItem onClick={() => handleMenuClick("")}>Contact</MenuItem>
+                <MenuItem onClick={() => handleMenuClick("/users/list")}>
+                  Home
+                </MenuItem>
+                <MenuItem onClick={() => handleMenuClick("/users/list")}>
+                  Contact
+                </MenuItem>
               </Menu>
             </div>
           }

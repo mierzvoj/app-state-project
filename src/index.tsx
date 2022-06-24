@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import Calculation from "./pages/Calculations/Calculation/Calculation";
+import Header from "./pages/Common/Layout/Header";
 import Login from "./pages/Common/Login/Login";
 import NotFound from "./pages/Common/NotFound/NotFound";
 import Drawing from "./pages/Drawing/Drawing";
@@ -22,7 +23,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      {/* <Header /> */}
+      <Header />
       <Routes>
         <Route path="/" element={<Login />}></Route>
         <Route path="/transitform" element={<TransitForm />}></Route>
