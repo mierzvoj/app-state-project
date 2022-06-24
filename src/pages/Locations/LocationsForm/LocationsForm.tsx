@@ -23,7 +23,7 @@ export default function LocationsForm() {
   const index = ((params.index ?? -1) as number) ?? -1;
   const location = locations[index] ?? {};
   const [street, setStreet] = useState(location?.street ?? "");
-  const [streetNo, setStreetNo] = useState(location?.streetNo ?? "");
+  const [streetNo, setStreetNo] = useState(location?.streetNo ?? 0);
   const [city, setCity] = useState(location?.city ?? "");
   const [open, setOpen] = useState(false);
 
