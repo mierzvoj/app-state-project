@@ -25,15 +25,17 @@ root.render(
       {/* <Header /> */}
       <Routes>
         <Route path="/" element={<Login />}></Route>
+        <Route path="/transitform" element={<TransitForm />}></Route>
+        <Route path="/transits" element={<TransitForm />}></Route>
 
         <Route path="/users" element={<Users />}>
           <Route path="/users/list" element={<UsersList />}></Route>
-          <Route path="/transitform" element={<TransitForm />}></Route>
+
           <Route path="/users/user/:index" element={<UserForm />}></Route>
         </Route>
         <Route path="/locations" element={<Locations />}>
           <Route path="/locations/list" element={<LocationsList />}></Route>
-          <Route path="/transits" element={<TransitForm />}></Route>
+
           <Route
             path="/locations/location/:index"
             element={<LocationsForm />}
