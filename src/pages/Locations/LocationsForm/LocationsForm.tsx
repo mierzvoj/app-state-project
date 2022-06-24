@@ -10,21 +10,23 @@ import {
 } from "@material-ui/core";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { LocationData } from "../../../model/location-data.model";
+import { ILocationsContext, LocationsContext } from "../Locations";
 import "./LocationsForm.css";
 
 const cities: string[] = ["Gdańsk", "Gdynia", "Sopot"];
 export default function LocationsForm() {
-  const [street, setStreet] = useState("");
-  const [streetNo, setStreetNo] = useState(0);
-  const [city, setCity] = useState("");
-  const [open, setOpen] = useState(false);
-  const [locations, setLocations] = useState<LocationData[]>([]);
+  const { locations, setLocations } =
+    useContext<ILocationsContext>(LocationsContext);
   const params = useParams();
   const index = ((params.index ?? -1) as number) ?? -1;
   const location = locations[index] ?? {};
+  const [street, setStreet] = useState(location?.street ?? "");
+  const [streetNo, setStreetNo] = useState(location?.streetNo ?? "");
+  const [city, setCity] = useState(location?.city ?? "");
+  const [open, setOpen] = useState(false);
+
   const navigate = useNavigate();
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
