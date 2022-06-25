@@ -18,6 +18,7 @@ const LocationsList = () => {
   ) => {
     navigate("/locations/location/" + index);
   };
+  console.log("locations");
 
   return (
     <LocationsContext.Consumer>

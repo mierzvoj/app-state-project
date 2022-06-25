@@ -7,7 +7,6 @@ import Header from "./pages/Common/Layout/Header";
 import Login from "./pages/Common/Login/Login";
 import NotFound from "./pages/Common/NotFound/NotFound";
 import Drawing from "./pages/Drawing/Drawing";
-import Locations from "./pages/Locations/Locations";
 import LocationsForm from "./pages/Locations/LocationsForm/LocationsForm";
 import LocationsList from "./pages/Locations/LocationsList/LocationsList";
 import Pokemons from "./pages/Pokemons/Pokemons";
@@ -34,7 +33,7 @@ root.render(
 
           <Route path="/users/user/:index" element={<UserForm />}></Route>
         </Route>
-        <Route path="/locations" element={<Locations />}>
+        <Route path="/locations" element={<LocationsForm />}>
           <Route path="/locations/list" element={<LocationsList />}></Route>
 
           <Route

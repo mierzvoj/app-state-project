@@ -12,8 +12,9 @@ import RadioGroup from "@mui/material/RadioGroup";
 import Select from "@mui/material/Select";
 import Snackbar from "@mui/material/Snackbar";
 import TextField from "@mui/material/TextField";
-import React, { ChangeEvent, useContext, useState } from "react";
+import React, { ChangeEvent, useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { setLocalStorageItem } from "../../../tools/local-storage";
 import { IUsersContext, UsersContext } from "../Users";
 import "./UserForm.css";
 
@@ -59,6 +60,8 @@ export default function UserForm() {
     ]);
     navigate("/users/list");
   };
+
+  useEffect(() => setLocalStorageItem("users", users), [users]);
 
   const handleCancel = () => {
     navigate("/users/list");

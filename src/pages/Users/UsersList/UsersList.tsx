@@ -6,19 +6,30 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserData } from "../../../model/user-data.model";
+import { setLocalStorageItem } from "../../../tools/local-storage";
 import UserDialog from "../UserDialog/UserDialog";
 import { IUsersContext, UsersContext } from "../Users";
 import "./UsersList.css";
 
+const getDatafromLS = () => {
+  const data = localStorage.getItem("users");
+  if (data) {
+    return JSON.parse(data);
+  } else {
+    return [];
+  }
+};
 const UsersList = () => {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const [hobbies, setHobbies] = React.useState<string[]>([]);
   const [rowIndex, setRowIndex] = React.useState<number>(-1);
   const { users, setUsers } = useContext<IUsersContext>(UsersContext);
+
+  useEffect(() => setLocalStorageItem("users", users), [users]);
 
   const handleClickOpen = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>

@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { UserData } from "../../model/user-data.model";
-
+const people: string = "";
 const entryData: UserData[] = [
   {
     name: "name1",
