@@ -5,51 +5,45 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { useNavigate } from "react-router-dom";
-import { LocationsContext } from "../Locations";
+import { LocationData } from "../../../model/location-data.model";
 import "./LocationsList.css";
 
-const LocationsList = () => {
-  const navigate = useNavigate();
+// const LocationsList = () => {
+//   const navigate = useNavigate();
+//   const [open, setOpen] = React.useState(false);
+//   const [locations, setLocations] = React.useState<string[]>([]);
+//   const [rowIndex, setRowIndex] = React.useState<number>(-1);
 
-  const handleClick = (
-    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
-    index: number
-  ) => {
-    navigate("/locations/location/" + index);
-  };
-
+//   const handleClick = (
+//     event: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
+//     index: number
+//   ) => {
+//     navigate("/locations/location/" + index);
+//   };
+const LocationsList = ({ locations }: { locations: LocationData[] }) => {
   return (
-    <LocationsContext.Consumer>
-      {(context) => (
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell className="header">Street</TableCell>
-                <TableCell className="header">Street No.</TableCell>
-                <TableCell className="header">City</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {context.locations.map((row, index) => (
-                <TableRow
-                  key={index}
-                  onClick={(event) => handleClick(event, index)}
-                >
-                  <TableCell component="th" scope="row">
-                    {row.street}
-                  </TableCell>
-                  <TableCell>{row.streetNo}</TableCell>
-                  <TableCell>{row.city}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
-    </LocationsContext.Consumer>
+    <TableContainer component={Paper}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell className="header">Street</TableCell>
+            <TableCell className="header">Street No.</TableCell>
+            <TableCell className="header">City</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {locations.map((row, index) => (
+            <TableRow key={index}>
+              <TableCell component="th" scope="row">
+                {row.street}
+              </TableCell>
+              <TableCell>{row.streetNo}</TableCell>
+              <TableCell>{row.city}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
-
 export default LocationsList;
