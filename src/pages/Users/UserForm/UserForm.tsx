@@ -12,9 +12,8 @@ import RadioGroup from "@mui/material/RadioGroup";
 import Select from "@mui/material/Select";
 import Snackbar from "@mui/material/Snackbar";
 import TextField from "@mui/material/TextField";
-import React, { ChangeEvent, useContext, useEffect, useState } from "react";
+import React, { ChangeEvent, useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { setLocalStorageItem } from "../../../tools/local-storage";
 import { IUsersContext, UsersContext } from "../Users";
 import "./UserForm.css";
 
@@ -31,8 +30,8 @@ export default function UserForm() {
   const [name, setName] = useState(user?.name ?? "");
   const [surname, setSurname] = useState(user?.surname ?? "");
   const [city, setCity] = useState(user?.city ?? "");
-  const [gender, setGender] = useState<"female" | "male" | undefined>(
-    user?.gender ?? "female"
+  const [role, setRole] = useState<"driver" | "passenger" | undefined>(
+    user?.role ?? "passenger"
   );
   const [active, setActive] = useState(user?.active ?? true);
   const [email, setEmail] = useState(user?.email ?? "");
@@ -47,7 +46,7 @@ export default function UserForm() {
   const handleApply = () => {
     setOpen(true);
     const copy = [...users];
-    copy[index] = { name, surname, city, gender, active, email, password };
+    copy[index] = { name, surname, city, role, active, email, password };
     setUsers(copy);
     navigate("/users/list");
   };
@@ -56,12 +55,10 @@ export default function UserForm() {
     setOpen(true);
     setUsers([
       ...users,
-      { name, surname, city, gender, active, email, password },
+      { name, surname, city, role, active, email, password },
     ]);
     navigate("/users/list");
   };
-
-  useEffect(() => setLocalStorageItem("users", users), [users]);
 
   const handleCancel = () => {
     navigate("/users/list");
@@ -81,7 +78,7 @@ export default function UserForm() {
     setName("");
     setSurname("");
     setCity("");
-    setGender("female");
+    setRole("passenger");
     setActive(true);
     setEmail("");
     setPassword("");
@@ -136,19 +133,19 @@ export default function UserForm() {
               ))}
             </Select>
           </FormControl>
-          <FormControl id="gender">
-            <FormLabel>Gender</FormLabel>
+          <FormControl id="role">
+            <FormLabel>Role</FormLabel>
             <RadioGroup
-              defaultValue={gender}
-              value={gender}
+              defaultValue={role}
+              value={role}
               onChange={(e) =>
-                setGender(e.target.value as "female" | "male" | undefined)
+                setRole(e.target.value as "driver" | "passenger" | undefined)
               }
             >
               <FormControlLabel
-                value="female"
+                value="passenger"
                 control={<Radio />}
-                label="Female"
+                label="passenger"
               />
               <FormControlLabel value="male" control={<Radio />} label="Male" />
             </RadioGroup>

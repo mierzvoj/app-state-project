@@ -6,30 +6,19 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserData } from "../../../model/user-data.model";
-import { setLocalStorageItem } from "../../../tools/local-storage";
 import UserDialog from "../UserDialog/UserDialog";
 import { IUsersContext, UsersContext } from "../Users";
 import "./UsersList.css";
 
-const getDatafromLS = () => {
-  const data = localStorage.getItem("users");
-  if (data) {
-    return JSON.parse(data);
-  } else {
-    return [];
-  }
-};
 const UsersList = () => {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
-  const [hobbies, setHobbies] = React.useState<string[]>([]);
+  const [passengers, setListOfPassengers] = React.useState<string[]>([]);
   const [rowIndex, setRowIndex] = React.useState<number>(-1);
   const { users, setUsers } = useContext<IUsersContext>(UsersContext);
-
-  useEffect(() => setLocalStorageItem("users", users), [users]);
 
   const handleClickOpen = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -50,7 +39,7 @@ const UsersList = () => {
   ) => {
     if (open === false) {
       setRowIndex(index);
-      setHobbies(users[index].hobbies ?? []);
+      setListOfPassengers(users[index].passengers ?? []);
     }
   };
 
@@ -63,10 +52,10 @@ const UsersList = () => {
     }
   };
 
-  const handleHobbies = (hobbies: string[]) => {
+  const handlePassengers = (passengers: string[]) => {
     const result = [...users];
-    result[rowIndex].hobbies = hobbies;
-    setHobbies(hobbies);
+    result[rowIndex].passengers = passengers;
+    setListOfPassengers(passengers);
     setUsers(result);
   };
 
@@ -80,11 +69,13 @@ const UsersList = () => {
                 <TableCell className="header">Name</TableCell>
                 <TableCell className="header">Surname</TableCell>
                 <TableCell className="header">City</TableCell>
-                <TableCell className="header">Gender</TableCell>
+                <TableCell className="header">Role</TableCell>
                 <TableCell className="header">Active</TableCell>
                 <TableCell className="header">Login</TableCell>
                 <TableCell className="header">Password</TableCell>
-                <TableCell className="header">Hobbies</TableCell>
+                <TableCell className="header">
+                  List of potential passengers
+                </TableCell>
                 <TableCell className="header">Dialog</TableCell>
               </TableRow>
             </TableHead>
@@ -102,11 +93,11 @@ const UsersList = () => {
                   </TableCell>
                   <TableCell>{row.surname}</TableCell>
                   <TableCell>{row.city}</TableCell>
-                  <TableCell>{row.gender}</TableCell>
+                  <TableCell>{row.role}</TableCell>
                   <TableCell>{row.active ? "Active" : "Inactive"}</TableCell>
                   <TableCell>{row.email}</TableCell>
                   <TableCell>{row.password}</TableCell>
-                  <TableCell>{row.hobbies?.map((h) => h + ",")}</TableCell>
+                  <TableCell>{row.passengers?.map((h) => h + ",")}</TableCell>
                   <TableCell>
                     <Button
                       onClick={(event) => handleClickOpen(event)}
@@ -117,8 +108,8 @@ const UsersList = () => {
                     <UserDialog
                       open={open}
                       onClose={handleClose}
-                      hobbies={hobbies}
-                      handleHobbies={handleHobbies}
+                      passengers={passengers}
+                      handlePassengers={handlePassengers}
                     ></UserDialog>
                   </TableCell>
                 </TableRow>

@@ -14,24 +14,24 @@ import "./UserDialog.css";
 export default function UserDialog({
   open,
   onClose,
-  hobbies,
-  handleHobbies,
+  passengers,
+  handlePassengers,
 }: {
   open: boolean;
   onClose: () => void;
-  hobbies: string[];
-  handleHobbies: (hobbies: string[]) => void;
+  passengers: string[];
+  handlePassengers: (passengers: string[]) => void;
 }) {
-  const [hobby, setHobby] = React.useState("");
+  const [passenger, setListOfPassengers] = React.useState("");
 
-  const addHobby = () => {
-    handleHobbies([...hobbies, hobby]);
+  const addPassenger = () => {
+    handlePassengers([...passengers, passenger]);
   };
 
-  const removeHobby = (index: number) => {
-    const result = [...hobbies];
+  const removePassenger = (index: number) => {
+    const result = [...passengers];
     result.splice(index, 1);
-    handleHobbies(result);
+    handlePassengers(result);
   };
 
   return (
@@ -47,19 +47,23 @@ export default function UserDialog({
           <DialogContentText id="alert-dialog-description"></DialogContentText>
           <form>
             <FormGroup id="formgroup">
-              <FormLabel>New hobby</FormLabel>
-              <FormControl id="hobby">
-                <div className="hobbies-input">
+              <FormLabel>New passenger</FormLabel>
+              <FormControl id="passenger">
+                <div className="passenger-input">
                   <TextField
                     autoFocus
-                    value={hobby}
+                    value={passenger}
                     onChange={(
                       e: React.ChangeEvent<
                         HTMLTextAreaElement | HTMLInputElement
                       >
-                    ) => setHobby(e.target.value)}
+                    ) => setListOfPassengers(e.target.value)}
                   />
-                  <Button color="primary" disabled={!hobby} onClick={addHobby}>
+                  <Button
+                    color="primary"
+                    disabled={!passengers}
+                    onClick={addPassenger}
+                  >
                     +
                   </Button>
                 </div>
@@ -67,10 +71,10 @@ export default function UserDialog({
             </FormGroup>
           </form>
           <ul>
-            {hobbies.map((h, index) => (
+            {passengers.map((h, index) => (
               <li key={index}>
                 {h}
-                <Button color="primary" onClick={() => removeHobby(index)}>
+                <Button color="primary" onClick={() => removePassenger(index)}>
                   -
                 </Button>
               </li>
